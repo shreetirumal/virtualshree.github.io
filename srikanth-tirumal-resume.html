@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Srikanth Tirumal – Cloud &amp; SRE Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#13202b; --muted:#566673; --paper:#f2f5f7; --card:#ffffff;
+  --line:#d4dde4; --cobalt:#2150d0; --amber:#e49a2b; --dim:#e3e9ee;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body)}
+a{color:var(--cobalt)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:48px 24px 80px;display:grid;grid-template-columns:300px 1fr;gap:56px}
+aside{position:sticky;top:32px;align-self:start}
+h1{font:800 clamp(2.4rem,5vw,3.4rem)/1 var(--head);letter-spacing:-.03em;margin:0 0 12px}
+.role{font:500 1.05rem/1.4 var(--head);color:var(--cobalt);margin:0 0 20px}
+.contact{list-style:none;margin:0 0 28px;padding:0;font-size:.95rem;color:var(--muted)}
+.contact li{margin-bottom:4px}
+h2{font:700 1.05rem var(--head);margin:0 0 10px}
+.hint{font-size:.9rem;color:var(--muted);margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{font:500 .85rem var(--head);border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 13px;cursor:pointer}
+.chip:hover{border-color:var(--cobalt)}
+.chip[aria-pressed="true"]{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+.btn{font:600 .9rem var(--head);background:none;border:0;color:var(--cobalt);cursor:pointer;padding:4px 0;text-decoration:underline}
+.langs{margin-top:28px;font-size:.95rem}
+.langs p{margin:2px 0;color:var(--muted)}
+.langs b{color:var(--ink);font-weight:600}
+
+main{min-width:0}
+.summary{font-size:1.2rem;line-height:1.55;margin:0 0 36px}
+
+/* career strip */
+.strip-label{display:flex;justify-content:space-between;font:500 .85rem var(--head);color:var(--muted);margin-bottom:6px}
+.strip{display:flex;height:44px;gap:3px;margin-bottom:8px}
+.seg{border:0;padding:0;border-radius:4px;background:var(--ink);cursor:pointer;min-width:6px;position:relative;transition:opacity .2s,background .2s}
+.seg:nth-child(odd){background:var(--cobalt)}
+.seg.off{opacity:.18}
+.seg:hover,.seg:focus-visible{background:var(--amber)}
+.seg span{position:absolute;left:0;top:calc(100% + 4px);font:500 .75rem var(--head);color:var(--muted);white-space:nowrap;pointer-events:none}
+.strip-wrap{margin-bottom:56px}
+
+/* roles */
+.jobs{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.job{position:relative;padding:0 0 28px 28px;transition:opacity .2s}
+.job::before{content:"";position:absolute;left:-7px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--card);border:3px solid var(--cobalt)}
+.job.off{opacity:.3}
+.job.flash .card{box-shadow:0 0 0 3px var(--amber)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px}
+.card>button{all:unset;box-sizing:border-box;display:block;width:100%;padding:18px 22px;cursor:pointer}
+.card>button:focus-visible{outline:3px solid var(--amber);outline-offset:-3px;border-radius:10px}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.co{font:700 1.3rem var(--head);letter-spacing:-.01em}
+.when{font:500 .85rem var(--head);color:var(--muted)}
+.title{color:var(--muted);font-style:italic;margin-top:2px}
+.client{font:500 .85rem var(--head);color:var(--cobalt)}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.job.open .more{grid-template-rows:1fr}
+.more>div{overflow:hidden}
+.more ul{margin:0;padding:4px 22px 18px 42px}
+.more li{margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;padding:0 22px 18px}
+.tag{font:500 .75rem var(--head);background:var(--dim);border-radius:4px;padding:2px 8px}
+.tag.hit{background:var(--amber);color:#2a1a00}
+.job:not(.open) .tags{padding-bottom:16px}
+
+.edu{margin-top:12px}
+.edu div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.edu small{color:var(--muted);font:500 .85rem var(--head)}
+.certs{margin:0;padding-left:20px}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:32px;padding-top:32px}
+  aside{position:static}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{
+  body{background:#fff;font-size:11pt}
+  .wrap{display:block;padding:0}
+  aside{position:static;margin-bottom:20px}
+  .chips,.hint,.btn,.strip-wrap{display:none}
+  .more{grid-template-rows:1fr!important}
+  .job.off{opacity:1}
+  .card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside>
+    <h1>Srikanth Tirumal</h1>
+    <p class="role">Associate Director, Cloud &amp; SRE · Azure Solutions Architect</p>
+    <ul class="contact">
+      <li>Hyderabad, Telangana, India</li>
+      <li><a href="tel:+919618337373">9618337373</a></li>
+      <li><a href="mailto:shreekanth.tirumal@gmail.com">shreekanth.tirumal@gmail.com</a></li>
+      <li><a href="https://www.linkedin.com/in/shreetirumal" target="_blank" rel="noopener">linkedin.com/in/shreetirumal</a></li>
+    </ul>
+
+    <h2>Filter by skill</h2>
+    <p class="hint">Pick one or more. Roles that used them stay lit.</p>
+    <div class="chips" id="chips" role="group" aria-label="Skill filters"></div>
+    <button class="btn" id="clear" hidden>Clear filters</button>
+    <div><button class="btn" id="toggleAll">Expand all roles</button> · <button class="btn" onclick="window.print()">Print / save PDF</button></div>
+
+    <div class="langs">
+      <h2>Languages</h2>
+      <p><b>Telugu</b> · native or bilingual</p>
+      <p><b>Hindi</b> · native or bilingual</p>
+      <p><b>English</b> · full professional</p>
+    </div>
+  </aside>
+
+  <main>
+    <p class="summary">Azure site reliability engineer building scalable, resilient and secure cloud platforms for global enterprises. My work spans Azure, Kubernetes, Citrix and DevOps, and I focus on smooth user experiences and operational excellence.</p>
+
+    <div class="strip-wrap">
+      <div class="strip-label"><span>Career, 2007 to today</span><span>Select a block to jump to the role</span></div>
+      <div class="strip" id="strip" role="list"></div>
+    </div>
+
+    <ol class="jobs" id="jobs"></ol>
+
+    <h2 style="margin-top:24px">Certifications</h2>
+    <ul class="certs">
+      <li>Citrix Virtual Apps and Desktops Service Fundamentals</li>
+      <li>Introduction to Citrix Identity and Authentication</li>
+      <li>Learning GitLab</li>
+    </ul>
+
+    <h2 style="margin-top:36px">Education</h2>
+    <div class="edu">
+      <div><span>PG Diploma in Computer Applications, Osmania University</span><small>2019–2020</small></div>
+      <div><span>BSc Biotechnology, Osmania University</span><small>2004–2007</small></div>
+      <div><span>SSC, Spring Dales High School, Secunderabad</span><small>2001–2002</small></div>
+    </div>
+  </main>
+</div>
+
+<script>
+const jobs = [
+  {id:"deloitte", co:"Deloitte", title:"Senior Manager, Engineering Automation", start:"2025-09", end:null, when:"Sep 2025 – present", where:"Hyderabad",
+   tags:["Kubernetes","Terraform","Infrastructure as Code","GitLab","Grafana","Automation"],
+   bullets:["Leading engineering automation and platform reliability across Kubernetes, Terraform, GitLab and Grafana."]},
+  {id:"tcs", co:"Tata Consultancy Services", client:"Client: MUFG", title:"Associate Consultant, Azure SRE", start:"2022-08", end:"2025-09", when:"Aug 2022 – Sep 2025", where:"Hyderabad",
+   tags:["Azure","Kubernetes","Terraform","Helm","CI/CD","SRE","Monitoring","Automation"],
+   bullets:["Designed and managed Kubernetes clusters for containerized workloads, with a focus on scalability and fault tolerance.",
+            "Automated infrastructure provisioning and application deployment with Terraform, Helm and CI/CD tooling.",
+            "Managed Azure environments, tuned performance and set up monitoring and alerting.",
+            "Developed reliability strategies covering incident management and proactive performance work.",
+            "Built pipelines and workflows for continuous integration, testing and delivery."]},
+  {id:"ubs", co:"UBS", title:"IT Specialist", start:"2018-07", end:"2022-07", when:"Jul 2018 – Jul 2022", where:"Mumbai",
+   tags:["Citrix","Azure","VMware","Chef","Puppet","CI/CD","Hybrid Cloud","Automation"],
+   bullets:["Automated and managed infrastructure with CI/CD, Chef and Puppet.",
+            "Citrix engineering: designed, deployed and documented new products.",
+            "End user computing workspace brokering engineer across Citrix, VMware and Azure.",
+            "Architected, engineered and documented a hybrid cloud model: Citrix Cloud with Azure and on-prem resources."]},
+  {id:"cts", co:"Cognizant", title:"Technical Lead, EUS Citrix Engineer", start:"2015-10", end:"2018-07", when:"Oct 2015 – Jul 2018", where:"Hyderabad",
+   tags:["Citrix","VMware","Splunk","Hardware"],
+   bullets:["Citrix engineering: designed and documented new products; administered XenDesktop 7.6 and higher.",
+            "VMware administration, including Splunk integration.",
+            "Architected physical hardware: procurement, preparation and management."]},
+  {id:"adp", co:"ADP", title:"Senior Member Technical", start:"2007-05", end:"2015-10", when:"May 2007 – Oct 2015", where:"Hyderabad",
+   tags:["AWS","VMware","Citrix","Virtualization","Application Packaging"],
+   bullets:["Cloud migration from on-premises to AWS.",
+            "Architected data center virtualization.",
+            "VMware administration and application packaging.",
+            "Citrix administration, from PresentationServer 4.5 onward."]}
+];
+
+const allTags = ["Azure","AWS","Kubernetes","Terraform","CI/CD","Automation","Citrix","VMware","SRE"];
+const selected = new Set();
+const $ = s => document.querySelector(s);
+const toMonths = s => { const d = s ? s.split("-") : [new Date().getFullYear(), new Date().getMonth()+1]; return d[0]*12 + (+d[1]); };
+const t0 = toMonths("2007-05"), t1 = toMonths(null);
+
+// chips
+allTags.forEach(t => {
+  const b = document.createElement("button");
+  b.className = "chip"; b.textContent = t; b.setAttribute("aria-pressed","false");
+  b.onclick = () => { selected.has(t) ? selected.delete(t) : selected.add(t); b.setAttribute("aria-pressed", selected.has(t)); apply(); };
+  $("#chips").appendChild(b);
+});
+$("#clear").onclick = () => { selected.clear(); document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed","false")); apply(); };
+
+// jobs + strip
+jobs.forEach(j => {
+  const li = document.createElement("li");
+  li.className = "job"; li.id = j.id;
+  li.innerHTML = `<div class="card">
+    <button aria-expanded="false" aria-controls="${j.id}-more">
+      <div class="top"><span class="co">${j.co}</span><span class="when">${j.when} · ${j.where}</span></div>
+      <div class="title">${j.title}</div>
+      ${j.client ? `<div class="client">${j.client}</div>` : ""}
+    </button>
+    <div class="more" id="${j.id}-more"><div><ul>${j.bullets.map(b => `<li>${b}</li>`).join("")}</ul></div></div>
+    <div class="tags">${j.tags.map(t => `<span class="tag" data-t="${t}">${t}</span>`).join("")}</div>
+  </div>`;
+  li.querySelector("button").onclick = e => toggle(li);
+  $("#jobs").appendChild(li);
+
+  const seg = document.createElement("button");
+  seg.className = "seg"; seg.dataset.id = j.id;
+  seg.style.flex = (toMonths(j.end) - toMonths(j.start)) + " 0 0";
+  seg.setAttribute("aria-label", `${j.co}, ${j.when}`);
+  seg.title = `${j.co} (${j.when})`;
+  seg.innerHTML = `<span>${j.co.split(" ")[0]}</span>`;
+  seg.onclick = () => {
+    li.scrollIntoView({behavior:"smooth", block:"center"});
+    if (!li.classList.contains("open")) toggle(li);
+    li.classList.add("flash"); setTimeout(() => li.classList.remove("flash"), 1200);
+  };
+  $("#strip").appendChild(seg);
+});
+// strip runs oldest to newest
+[...$("#strip").children].reverse().forEach(c => $("#strip").appendChild(c));
+
+function toggle(li, force){
+  const open = force ?? !li.classList.contains("open");
+  li.classList.toggle("open", open);
+  li.querySelector("button").setAttribute("aria-expanded", open);
+}
+function apply(){
+  jobs.forEach(j => {
+    const match = !selected.size || j.tags.some(t => selected.has(t)) ;
+    const el = document.getElementById(j.id);
+    el.classList.toggle("off", !match);
+    el.querySelectorAll(".tag").forEach(g => g.classList.toggle("hit", selected.has(g.dataset.t)));
+    document.querySelector(`.seg[data-id="${j.id}"]`).classList.toggle("off", !match);
+  });
+  $("#clear").hidden = !selected.size;
+}
+let all = false;
+$("#toggleAll").onclick = e => {
+  all = !all;
+  document.querySelectorAll(".job").forEach(li => toggle(li, all));
+  e.target.textContent = all ? "Collapse all roles" : "Expand all roles";
+};
+toggle(document.getElementById("deloitte"), true);
+toggle(document.getElementById("tcs"), true);
+</script>
+</body>
+</html>
